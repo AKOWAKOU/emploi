@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import dj_database_url
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,12 +11,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e=su4&i0eyz*h&w7ynxo@^u36x$ktm=gbj)r)2g7nas2@e!s6p'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+#
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG","False").lower()=="True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -82,10 +84,10 @@ DATABASES = {
     #     }  
     # }
 }
+database_url=os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse("database_url")
 
-DATABASES["default"] = dj_database_url.parse("postgresql://emploi_database_user:tjCizrmXOQlUZvdxWyWcpjFnPiQBy7Dl@dpg-csmdmstds78s73ee5hc0-a.oregon-postgres.render.com/emploi_database")
-
-#postgresql://emploi_database_user:tjCizrmXOQlUZvdxWyWcpjFnPiQBy7Dl@dpg-csmdmstds78s73ee5hc0-a.oregon-postgres.render.com/emploi_database
+#
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
