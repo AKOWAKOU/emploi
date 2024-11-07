@@ -12,8 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = 'django-insecure-e=su4&i0eyz*h&w7ynxo@^u36x$ktm=gbj)r)2g7nas2@e!s6p'
 DEBUG = os.getenv("DEBUG", "False") == "True"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
@@ -152,3 +153,9 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'TimeTable - IFRI <timetable239@gmail.com>'
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+STATIC_URL = 'static/'
+
+# Where collected static files will be stored
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_URL = '/media'
