@@ -57,9 +57,9 @@ Maintenant que vous avez Django installé, vous pouvez continuer à travailler s
 Pour récuperer et lancer l'application sur votre machine, assurez vous d'abord d'avoir python et django installé sur votre machine. Ensuite procéder aux étapes suivantes :
 
     ```bash
-    git clone https://github.com/v1p3r75/PIL1_2223_4.git
+    git clone git@github.com:AKOWAKOU/emploi.git
 
-    cd PIL1_2223_4
+    cd emploi
     python -m venv venv 
     source venv/bin/active
     pip install -r requirements.txt
