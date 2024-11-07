@@ -11,12 +11,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
 
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG", "False") == "True"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG","False").lower()=="True"
+DEBUG =True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['example-emploi-service.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -86,11 +87,11 @@ DATABASES = {
     #     }  
     # }
 }
-database_url=os.environ.get("DATABASE_URL")
-#DATABASES["default"] = dj_database_url.parse("database_url")
 
 DATABASES = {
-    "default": dj_database_url.parse(os.getenv("DATABASE_URL", "postgresql://emploi_database_user:tjCizrmXOQlUZvdxWyWcpjFnPiQBy7Dl@dpg-csmdmstds78s73ee5hc0-a.oregon-postgres.render.com/emploi_database"))
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL", "postgresql://emploi_database_user:tjCizrmXOQlUZvdxWyWcpjFnPiQBy7Dl@dpg-csmdmstds78s73ee5hc0-a.oregon-postgres.render.com/emploi_database")
+    )
 }
 
 # Password validation
@@ -147,7 +148,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'timetable239@gmail.com'
-EMAIL_HOST_PASSWORD = 'hcgsyoyjbcozxacj'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'TimeTable - IFRI <timetable239@gmail.com>'
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
