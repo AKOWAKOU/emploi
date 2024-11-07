@@ -48,9 +48,6 @@ Pour vérifier si Django est installé correctement, exécutez la commande suiva
 ```bash
 django-admin --version
 ```
-Cela affichera la version de Django installée.
-
-Maintenant que vous avez Django installé, vous pouvez continuer à travailler sur le projet d'intégration IFRI 2022.
 
 ## Comment lancer l'application sur votre machine
 
