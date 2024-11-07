@@ -1,0 +1,118 @@
+{% extends "includes/crud.html" %}
+    {% block modalForm %}
+    <div class="">
+        <div class="d-flex justify-content-end">
+            <a
+                href="javascript:void(0)"
+                class="d-block btn-duplicate p-2 fd-bg-primary lh-1 text-white"
+                style="width: 30px; height: 30px;" title="Ajouter autre ligne"
+
+                >
+                    <i class="mdi mdi-plus"></i>
+            </a>
+        </div>
+        <div class="f-content">
+            <div class="group">
+                <div class="row row-cols-3">
+                    <div>
+                        <label class="position-relative text-muted w-100">Classe
+                            <select name='level_id' class="form-select" required>
+                                {% for level in levels %}
+                                    <option value={{level.id}}>
+                                        {{level.label}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="position-relative text-muted w-100">Cours
+                            <select name='subject_id' class="form-select" required>
+                                {% for subject in subjects %}
+                                    <option value={{subject.id}}>
+                                        {{subject.label}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="position-relative text-muted w-100">Professeur
+                            <select name='user_id' class="form-select" required>
+                                {% for teacher in teachers %}
+                                    <option value={{teacher.id}}>
+                                        {{teacher.firstname}} {{teacher.lastname}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="row row-cols-3 mt-3">
+                    <div>
+                        <label class="position-relative text-muted w-100">Salle
+                            <select name='classroom_id' class="form-select" required>
+                                {% for classroom in classrooms %}
+                                    <option value={{classroom.id}}>
+                                        {{classroom.label}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="position-relative text-muted w-100">Début
+                            <input type="datetime-local" name="start_time" class="form-control" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="position-relative text-muted w-100">Fin
+                            <input type="datetime-local" name="end_time" class="form-control" required>
+                        </label>
+                    </div>
+                </div><hr>
+            </div>
+        </div>
+
+    </div>
+    {% endblock %}
+
+    {% block pageName %} Emploi du temps {% endblock %}
+    {% block pathName %} Emploi {% endblock %}
+
+    {% block tableHead %}
+
+        <th class="text-center">Semaines</th>
+        <th class="text-center">Classe</th>
+        <th class="text-center">Visualiser</th>
+        <th class="text-center">Actions</th>
+
+    {% endblock %}
+
+    {% block actionURL %}
+
+        {% url 'admin-timetables' %}
+
+    {% endblock %}
+
+    {% block data %}
+        [{% for timetable in timetables %}
+            {% for weeks in timetable.weeks %}
+                {'level' : '{{timetable.level}}',
+                'level_id' : '{{timetable.level_id}}',
+                'week' : {{weeks | safe }},},
+            {% endfor %}
+        {% endfor %}]
+    {% endblock data %}
+    {% block columns %}
+        {data : 'week', render : (data) => "Emploi du Temps de la Semaine " + data.week },
+        {data : 'level'},
+        {data : null, render : (data) => `<a href="#/weeks/${data.level_id}/${data.week.week}"
+            class="fd-bg-primary d-block p-2 w-75 mx-auto shadow-sm text-white"
+            style="border-radius: 30px"
+            title="Voir l'emploi du temps"
+    >
+        Voir l'emploi
+    </a>`},
+    {% endblock %}
+    {% block modalClass %}modal-dialog-scrollable modal-lg{% endblock %}

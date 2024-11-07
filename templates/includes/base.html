@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% if title %}
+        <title>{{ title }} - TIMETABLE</title>
+    {% else %}
+        <title>TIMETABLE -DEV</title>
+    {% endif %}
+    <meta name="description" content="Projet d'integration IFRI 2023. La gestion des emplois du temps." />
+    <meta name="author" content="IFRI GROUPE 4" />
+    <link rel="stylesheet" href={% static 'vendor/bootstrap/bootstrap.min.css' %} />
+    <link rel="stylesheet" href={% static 'vendor/animate/animate.css' %} />
+    <link rel="stylesheet" href={% static 'vendor/mdi/css/materialdesignicons.min.css' %} />
+    <link rel="stylesheet" href={% static 'css/index.css' %} />    
+    <link rel="stylesheet" href={% static 'vendor/sweetalert/sweetalert2.min.css' %} />    
+    <link rel="stylesheet" href={% static 'vendor/datatables/dataTables.bootstrap5.min.css' %} />    
+    <link rel="stylesheet" href={% static 'vendor/toastr/toastr.min.css' %} />    
+    <link rel="stylesheet" href={% static 'vendor/timetable/timetablejs.css' %} />    
+    <link rel="icon" href={% static 'img/favicon-16x16.png' %} />
+    <script type="text/javascript" src={% static 'vendor/jquery/jquery.js' %}></script>
+    <script type="text/javascript" src={% static 'vendor/bootstrap/bootstrap.min.js' %}></script>
+    <script src={% static 'vendor/sweetalert/sweetalert2.all.min.js' %}></script>
+    <script src={% static 'vendor/chartjs/chartjs.min.js' %}></script>
+    <script src={% static 'vendor/datatables/jquery.dataTables.min.js' %}></script>
+    <script src={% static 'vendor/datatables/dataTables.bootstrap5.min.js' %}></script>
+    <script src={% static 'vendor/toastr/toastr.min.js' %}></script>
+    <script src={% static 'vendor/timetable/timetable.js' %}></script>
+    <script src={% static 'js/service-worker.js' %}></script>
+    <link rel="manifest" href={% static 'timetable.webmanifest' %}>
+  </head>
+  <body class="fd-bg-silver h-100 overflow-hidden">
+    <div class="preloader position-fixed bg-white top-0 start-0 w-100 h-100" style="z-index: 1000;">
+        <div style="width: 30%; height: 250px; margin: 30vh auto;">
+            <img src="/static/img/logo.png" alt="loader" style="width: 100%; height: 100%"><br>
+        </div>
+    </div>
+    <div class="container-fluid h-100 p-0">
+        {% include './header.html' %}
+        <div class="position-relative container-fluid h-100 m-0">
+            <div class="row h-100">
+                {% include './sidebar.html' %}
+                <div class="main col col-12 col-lg-9 h-100 overflow-scroll" style="padding-bottom: 20vh;">
+                    <main class="pt-5 px-2">
+                        {% block main %} {% endblock %}
+                    </main>
+                </div>
+            </div>
+        <div>
+    </div>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

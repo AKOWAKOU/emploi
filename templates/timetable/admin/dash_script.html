@@ -1,0 +1,56 @@
+<script>
+
+$(document).ready(function () {
+
+    const testsGraph = {
+
+        labels: {{ levels_list | safe }},
+        datasets: [
+            {
+                label: 'Enseignants',
+                data: {{ teachers_by_levels | safe }},
+                borderColor: '#18aefa', // Couleur de la ligne
+                backgroundColor: '#18aefa', // Couleur de fond
+                fill: false, // Pas de remplissage sous la ligne
+            },
+            {
+                label: 'Étudiants',
+                data: [5, 6, 7, 8, 9],
+                borderColor: '#3D5EE1', // Couleur de la ligne
+                backgroundColor: '#3D5EE1', // Couleur de fond
+                fill: false, // Pas de remplissage sous la ligne
+            },
+            {
+                label: 'Cours',
+                data: [2, 3, 4, 5, 10],
+                borderColor: '#2A3042', // Couleur de la ligne
+                backgroundColor: '#2A3042', // Couleur de fond
+                fill: false, // Pas de remplissage sous la ligne
+            }
+        ]
+    };
+
+    // Configuration du graphique
+    const options = {
+        responsive: true,
+        title: {
+            display: true,
+            text: "Comparaison du nombre d'enseignants, de cours et d'étudiants"
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    // Création du graphique
+    const ctx = document.getElementById('graph-viewer')?.getContext('2d');
+    const myChart = ctx && new Chart(ctx, {
+        type: 'bar',
+        data: testsGraph,
+        options: options
+    });
+
+})
+</script>
